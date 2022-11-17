@@ -2,8 +2,15 @@ import { Api, ViteStaticSite } from "@serverless-stack/resources";
 
 export function MyStack({ stack }) {
   const api = new Api(stack, "api", {
+    cors: true,
     routes: {
       "GET /": "functions/lambda.handler",
+      "GET /vlammekes": {
+        function:{
+          handler: "functions/vlammetjes.list",
+          permissions: ['iot']
+        }
+      }
     },
   });
 
