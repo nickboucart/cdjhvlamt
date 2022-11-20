@@ -5,7 +5,7 @@
 	import { getDataForQuery } from "../helpers/APIHelpers";
 
 	const queryResult = useQuery("getVlammetjes", () =>
-		getDataForQuery('/vlammekes'));
+		getDataForQuery('/vlammekes'), {staleTime: 3*60*1000});
 
 </script>
 
