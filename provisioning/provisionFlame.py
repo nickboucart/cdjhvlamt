@@ -5,21 +5,39 @@ import json
 # Create random name for things
 import random
 import string
+import argparse
+import geocoder
 
 # Parameters for Thing
 thingArn = ''
 thingId = ''
-thingName = 'cdjhvlamt-' + ''.join(
-    [random.choice(string.digits) for n in range(5)])
+thingName = ''
 defaultPolicyName = 'cdjhvlamt-policy'
 print(thingName)
+thingClient = boto3.client('iot')
+
 ###################################################
 
 
-def createThing():
+def createThing(eigenaar, adres):
     global thingClient
+    global thingName
+    thingName = 'cdjhvlamt-' + eigenaar
+    g = geocoder.osm(adres)
+
+    
+    print(thingName)
     thingResponse = thingClient.create_thing(
-        thingName=thingName
+        thingName=thingName,
+        thingTypeName = "CDJHVlam",
+        attributePayload={
+        "attributes": {
+            "eigenaar": eigenaar,
+            "lat": str(g.json['lat']),
+            "lng": str(g.json['lng']),
+            "adres": adres.replace(" ", '_')
+        }
+    },
     )
     data = json.loads(json.dumps(thingResponse, sort_keys=False, indent=4))
     for element in data:
@@ -64,5 +82,16 @@ def createCertificate():
     )
 
 
-thingClient = boto3.client('iot')
-createThing()
+# createThing()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-e", "--Eigenaar", help = "Van wie is dit vlammetje?")
+    parser.add_argument("-a", "--Adres", help = "Waar woon je?")
+    args = parser.parse_args()
+    if args.Eigenaar:
+        print("Eigenaar van dit vlammetje: % s" % args.Eigenaar)
+    if args.Adres:
+        print("Adres van dit vlammetje: % s" % args.Adres)
+    createThing(args.Eigenaar, args.Adres)
+
+

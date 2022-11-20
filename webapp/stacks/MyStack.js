@@ -10,7 +10,12 @@ export function MyStack({ stack }) {
           permissions: ['iot']
         }
       },
-      "GET /": "functions/lambda.handler",
+      "GET /vlammeke/{id}": {
+        function: {
+          handler: "functions/vlammetjes.get",
+          permissions: ['iot']
+        }
+      },
       "GET /vlammekes": {
         function: {
           handler: "functions/vlammetjes.list",

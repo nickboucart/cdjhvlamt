@@ -1,25 +1,53 @@
-
-
 <script>
-//  import {LeafletMap, Marker, TileLayer} from 'svelte-leafletjs?client';
+	import { onMount, onDestroy } from "svelte";
+	import Vlam from "../routes/Vlam.svelte";
 
-	// const mapOptions = {
-	// 		center: [1.364917, 103.822872],
-	// 		zoom: 11,
-	// };
-	// const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-	// const tileLayerOptions = {
-	// 		minZoom: 0,
-	// 		maxZoom: 20,
-	// 		maxNativeZoom: 19,
-	// 		attribution: "© OpenStreetMap contributors",
-	// };
+	export let vlammetjes;
+	let mapElement;
+	let map;
+
+	onMount(async () => {
+		const leaflet = await import("leaflet");
+		console.log(vlammetjes);
+
+		map = leaflet.map(mapElement).setView([50.7360524, 4.2374349], 13);
+
+		leaflet
+			.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+				attribution:
+					'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+			})
+			.addTo(map);
+
+		vlammetjes.forEach((vlammetje) => {
+			if (vlammetje.attributes.lat) {
+				leaflet
+					.marker([vlammetje.attributes.lat, vlammetje.attributes.lng])
+					.addTo(map);
+			}
+		});
+
+		// leaflet.marker([51.5, -0.09]).addTo(map)
+		// 		.bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+		// 		.openPopup();
+	});
+
+	onDestroy(async () => {
+		if (map) {
+			console.log("Unloading Leaflet map.");
+			map.remove();
+		}
+	});
 </script>
 
-<div class="example">
-	<!-- <LeafletMap options={mapOptions}>
-			<TileLayer url={tileUrl} options={tileLayerOptions}/>
-			<Marker latLng={[1.282375, 103.864273]}/>
-			<Marker latLng={[1.359167, 103.989441]} rotationAngle={45}/>
-	</LeafletMap> -->
-</div>
+<main>
+	<div bind:this={mapElement} />
+</main>
+
+<style>
+	@import "leaflet/dist/leaflet.css";
+	main div {
+		width: 60%;
+		height: 600px;
+	}
+</style>

@@ -1,12 +1,29 @@
-import { IotData } from "aws-sdk";
+import { IotData, Iot } from "aws-sdk";
 import { ok } from "../helpers/responses";
 
-const iotData = new IotData({ endpoint: "a26wt0x5359obq-ats.iot.eu-west-1.amazonaws.com" });
+const IOTENDPOINT = "a26wt0x5359obq-ats.iot.eu-west-1.amazonaws.com"
+
+const iotData = new IotData({ endpoint: IOTENDPOINT });
+const iot = new Iot();
+
 
 
 export const list = async (event) => {
-	const vlammekes = [{ "naam": "florian", "vlamnaam": "vlam-van-florian" }, { "naam": "arlieke", "vlamnaam": "vlam-van-arlieke" }]
-	return ok(vlammekes);
+	// const vlammekes = [{ "naam": "florian", "vlamnaam": "vlam-van-florian" }, { "naam": "arlieke", "vlamnaam": "vlam-van-arlieke" }]
+
+	const vlammekes = await iot.listThings(
+		{
+			"maxResults": 100,
+			"thingTypeName": "CDJHVlam"
+		}
+	).promise();
+
+	return ok(vlammekes.things);
+};
+
+export const get = async (event) => {
+	const vlam = await iot.describeThing({ "thingName": event.pathParameters.id }).promise();
+	return ok(vlam);
 };
 
 
