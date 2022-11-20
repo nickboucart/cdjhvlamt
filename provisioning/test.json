@@ -1,0 +1,9 @@
+{'accuracy': 0.44010000000000005, 'address': '26, Louizalaan, Het Nachtegaaltje, Buizingen, Halle, Halle-Vilvoorde, Vlaams-Brabant, Vlaanderen,
+	1501, België / Belgique / Belgien', 'bbox': {'northeast': [
+			50.7411491,
+			4.2683037
+		], 'southwest': [
+			50.7410117,
+			4.2680852
+		]
+	}, 'confidence': 10, 'country': 'België / Belgique / Belgien', 'country_code': 'be', 'county': 'Halle-Vilvoorde', 'housenumber': '26', 'importance': 0.44010000000000005, 'lat': 50.7410804, 'lng': 4.26819445339213, 'neighborhood': 'Het Nachtegaaltje', 'ok': True, 'osm_id': 944672907, 'osm_type': 'way', 'place_id': 281632988, 'place_rank': 30, 'postal': '1501', 'quality': 'house', 'raw': {'place_id': 281632988, 'licence': 'Data © OpenStreetMap contributors, ODbL 1.0. https: //osm.org/copyright', 'osm_type': 'way', 'osm_id': 944672907, 'boundingbox': ['50.7410117', '50.7411491', '4.2680852', '4.2683037'], 'lat': '50.7410804', 'lon': '4.26819445339213', 'display_name': '26, Louizalaan, Het Nachtegaaltje, Buizingen, Halle, Halle-Vilvoorde, Vlaams-Brabant, Vlaanderen, 1501, België / Belgique / Belgien', 'place_rank': 30, 'category': 'building', 'type': 'house', 'importance': 0.44010000000000005, 'address': {'house_number': '26', 'road': 'Louizalaan', 'neighbourhood': 'Het Nachtegaaltje', 'village': 'Buizingen', 'town': 'Halle', 'county': 'Halle-Vilvoorde', 'state': 'Vlaams-Brabant', 'ISO3166-2-lvl6': 'BE-VBR', 'region': 'Vlaanderen', 'ISO3166-2-lvl4': 'BE-VLG', 'postcode': '1501', 'country': 'België / Belgique / Belgien', 'country_code': 'be'}}, 'region': 'Vlaams-Brabant', 'state': 'Vlaams-Brabant', 'status': 'OK', 'street': 'Louizalaan', 'town': 'Halle', 'type': 'house', 'village': 'Buizingen'}
