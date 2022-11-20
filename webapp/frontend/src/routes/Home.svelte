@@ -1,36 +1,28 @@
 <script>
-	import { onMount } from "svelte";
 	import { Link } from "svelte-routing";
+	import { useQuery } from "@sveltestack/svelte-query";
 	import VlamMap from "../components/VlamMap.svelte";
-	import { getData } from "../helpers/APIHelpers";
+	import { getDataForQuery } from "../helpers/APIHelpers";
 
-	let vlammetjes = [];
+	const queryResult = useQuery("getVlammetjes", () =>
+		getDataForQuery('/vlammekes'));
 
-	// onMount(async () => {
-	// 	vlammetjes = await getData('/vlammekes');
-	// });
-
-	async function getVlammetjes() {
-		vlammetjes = await getData("/vlammekes");
-		return vlammetjes;
-	}
 </script>
 
-<div>
-	<div>
-		{#await getVlammetjes()}
-			<p>data laden...</p>
-		{:then vlammetjes}
-			<ul>
-				{#each vlammetjes as { thingName, attributes }, i}
-					<li>
-						<Link to={"/vlammetjes/" + thingName}
-							>Vlam van {attributes.eigenaar}</Link
-						>
-					</li>
-				{/each}
-				<VlamMap vlammetjes={vlammetjes} />
-			</ul>
-		{/await}
-	</div>
-</div>
+{#if $queryResult.isLoading}
+<span>Loading...</span>
+{:else if $queryResult.error}
+<span>An error has occurred: {$queryResult.error.message}</span>
+{:else}
+<ul>
+	{#each $queryResult.data as vlam }
+	<li>
+		<Link to={"/vlammetjes/" + vlam.thingName}
+			>Vlam van {vlam.attributes.eigenaar}</Link
+		>
+	</li>
+	{/each}
+</ul>
+
+<VlamMap vlammetjes={$queryResult.data} />
+{/if}

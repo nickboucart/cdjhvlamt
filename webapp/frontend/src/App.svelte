@@ -1,5 +1,8 @@
 <script>
   import { Router, Link, Route } from "svelte-routing";
+  import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
+
+
   import Home from "./routes/Home.svelte";
   import Vlammetjes from "./routes/Vlammetjes.svelte";
   import Vlam from "./routes/Vlam.svelte";
@@ -10,10 +13,10 @@
   // import VlamMap from "./components/VlamMap.svelte";
   
   export let url = "";
-
+  const queryClient = new QueryClient();
   </script>
   
-  
+  <QueryClientProvider client={queryClient}>
   <Router url="{url}">
     <nav>
       <Link to="/">Home</Link>
@@ -29,3 +32,4 @@
     </div>
     <Footer />
   </Router>
+</QueryClientProvider>

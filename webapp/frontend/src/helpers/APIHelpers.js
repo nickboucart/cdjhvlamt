@@ -6,6 +6,10 @@ export const getData = async (url = "") => {
 	return data;
 }
 
+export const getDataForQuery = async (url = "") => {
+	return fetch(BASE_URL + url).then((res) => res.json());
+}
+
 
 export const postData = async (url = "", data = {}) => {
 	const response = await fetch(BASE_URL +  url, {
