@@ -11,9 +11,10 @@ import cdjh_mqtt
 import display
 import wifimgr
 
-# ssid = "staatsveiligheid42"
-# passwd = 'blijfvanmijnerf!!'
-thingName = "cdjhvlamt-71373"
+
+thingName = ""
+with open("name.txt", "r") as f:
+    thingName = f.readline()
 
 
 def main():
@@ -24,10 +25,10 @@ def main():
     passwd = mgr.get_active_password()
     mgr = None
     c = None
-    del wifimgr
-    del sys.modules["wifimgr"]
+#     del wifimgr
+#     del sys.modules["wifimgr"]
     gc.collect()
-    if (c):
+    if ssid:
         client = cdjh_mqtt.CDJHVlamtMQTTClient(thingName, ssid, passwd)
         client.run()
     else:

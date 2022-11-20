@@ -1,12 +1,10 @@
 # Connecting to AWS
+import json
+import argparse
+import shutil
+import geocoder
 import boto3
 
-import json
-# Create random name for things
-import random
-import string
-import argparse
-import geocoder
 
 # Parameters for Thing
 thingArn = ''
@@ -81,6 +79,15 @@ def createCertificate():
         principal=certificateArn
     )
 
+def mvCertsToFirmwareFolder():
+    shutil.move('./cert.pem', '../firmware/cert.pem')
+    shutil.move('./private.key', '../firmware/private.key')
+    shutil.move('./public.key', '../firmware/public.key')
+
+def writeNameFile():
+    global thingName
+    with open("../firmware/name.txt", "w") as f:
+        f.write(thingName)
 
 # createThing()
 if __name__ == "__main__":
@@ -93,5 +100,7 @@ if __name__ == "__main__":
     if args.Adres:
         print("Adres van dit vlammetje: % s" % args.Adres)
     createThing(args.Eigenaar, args.Adres)
+    mvCertsToFirmwareFolder()
+    writeNameFile()
 
 

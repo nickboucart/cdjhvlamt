@@ -32,8 +32,7 @@ class CDJHVlamtMQTTClient:
         self.wifi_pass = wifi_pass
         self.animation = None
         self.leds = tl.TrickLED(machine.Pin(33), 60)
-        
-        
+         
     def getConfig(self):
         with open('private.key') as f:
             key_data = f.read()
@@ -47,10 +46,9 @@ class CDJHVlamtMQTTClient:
         config['client_id'] = self.thingName
         config['ssl'] = True
         config['ssl_params']=  {"cert": cert_data, "key": key_data, "server_side": False}
-        config['ssid'] = "staatsveiligheid42"
-        config['wifi_pw'] = 'blijfvanmijnerf!!'
+        config['ssid'] = self.wifi_ssid
+        config['wifi_pw'] = self.wifi_pass
         return config
-        
         
     def callback(self, topic, msg, retained):
         print((topic, msg, retained))
@@ -78,9 +76,6 @@ class CDJHVlamtMQTTClient:
             asyncio.create_task(self.animation.play(0))
         gc.collect()
 
-            
-        
-
     async def _run(self, client):
         await client.connect()
         # publish our initial state, running the fire animation
@@ -94,7 +89,7 @@ class CDJHVlamtMQTTClient:
     def run(self):
         MQTTClient.DEBUG = True  # Optional: print diagnostic messages
         client = MQTTClient(self.getConfig())
-        self.stop_annimation_and_run_new_one('conjunction')
+        self.stop_annimation_and_run_new_one('fire')
         try:
             asyncio.run(self._run(client))
         finally:
