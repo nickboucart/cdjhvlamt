@@ -2,6 +2,7 @@
 	import { useQuery } from "@sveltestack/svelte-query";
 
 	import { postData, getDataForQuery } from "../helpers/APIHelpers";
+	import VlamMap from "../components/VlamMap.svelte";
 
 	const queryResult = useQuery(
 		"getVlam" + $$props.id,
@@ -22,7 +23,7 @@
 	{:else if $queryResult.error}
 		<span>An error has occurred: {$queryResult.error.message}</span>
 	{:else}
-		<h2>Toon de details van {$queryResult.data.attributes.eigenaar}</h2>
+		<h2>Het vlammetje van {$queryResult.data.attributes.eigenaar}</h2>
 		<p>
 			Stuur het vlammetje aan:
 			<button on:click={() => onClick($queryResult.data.thingName, "fire")}
@@ -33,15 +34,6 @@
 				>andere animatie</button
 			>
 		</p>
+		<VlamMap vlammetjes={[$queryResult.data]} mapCenter={[$queryResult.data.attributes.lat, $queryResult.data.attributes.lng]} zoom={16}/>
 	{/if}
-	<!-- {#await getVlam()}
-		Even geduld, we laden data...
-	{:then vlam}
-		<h2>Toon de details van {vlam.attributes.eigenaar}</h2>
-		<p>
-			Stuur het vlammetje aan:
-			<button on:click={() => onClick("fire")}>vlam animatie</button>
-			<button on:click={() => onClick("conjunction")}>andere animatie</button>
-		</p>
-	{/await} -->
 </div>

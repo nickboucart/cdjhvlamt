@@ -3,6 +3,9 @@
 	import Vlam from "../routes/Vlam.svelte";
 
 	export let vlammetjes;
+	export let mapCenter = [50.7360524, 4.2374349];
+	export let zoom = 14;
+
 	let mapElement;
 	let map;
 
@@ -10,7 +13,7 @@
 		const leaflet = await import("leaflet");
 		console.log(vlammetjes);
 
-		map = leaflet.map(mapElement).setView([50.7360524, 4.2374349], 13);
+		map = leaflet.map(mapElement).setView( mapCenter, zoom);
 
 		leaflet
 			.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -22,7 +25,9 @@
 		vlammetjes.forEach((vlammetje) => {
 			if (vlammetje.attributes.lat) {
 				leaflet
-					.marker([vlammetje.attributes.lat, vlammetje.attributes.lng])
+					.circle([vlammetje.attributes.lat, vlammetje.attributes.lng], {
+						radius: 50,
+					})
 					.addTo(map);
 			}
 		});

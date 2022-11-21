@@ -1,5 +1,7 @@
-import { MyStack } from "./MyStack";
 import { App } from "@serverless-stack/resources";
+import { Tags } from "aws-cdk-lib";
+import { MyStack } from "./MyStack";
+
 
 /**
  * @param {App} app
@@ -13,4 +15,5 @@ export default function (app) {
     },
   });
   app.stack(MyStack);
+  Tags.of(app).add('project', `cdjh-vlamt-${app.stage}`);
 }
