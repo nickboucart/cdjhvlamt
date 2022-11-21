@@ -3,6 +3,7 @@
 
 	import { postData, getDataForQuery } from "../helpers/APIHelpers";
 	import VlamMap from "../components/VlamMap.svelte";
+	import { isVlamGevonden } from "../helpers/gevondenHelper";
 
 	const queryResult = useQuery(
 		"getVlam" + $$props.id,
@@ -22,16 +23,31 @@
 		<span>An error has occurred: {$queryResult.error.message}</span>
 	{:else}
 		<h2>Het vlammetje van {$queryResult.data.attributes.eigenaar}</h2>
-		<p>
-			Stuur het vlammetje aan:
-			<button on:click={() => onClick($queryResult.data.thingName, "fire")}
-				>vlam animatie</button
-			>
-			<button
-				on:click={() => onClick($queryResult.data.thingName, "conjunction")}
-				>andere animatie</button
-			>
-		</p>
-		<VlamMap vlammetjes={[$queryResult.data]} mapCenter={[$queryResult.data.attributes.lat, $queryResult.data.attributes.lng]} zoom={16}/>
+
+		<VlamMap
+			vlammetjes={[$queryResult.data]}
+			mapCenter={[
+				$queryResult.data.attributes.lat,
+				$queryResult.data.attributes.lng,
+			]}
+			zoom={16}
+		/>
+		{#if isVlamGevonden($queryResult.data.thingName)}
+			<p>
+				Stuur het vlammetje aan:
+				<button on:click={() => onClick($queryResult.data.thingName, "fire")}
+					>vlam animatie</button
+				>
+				<button
+					on:click={() => onClick($queryResult.data.thingName, "conjunction")}
+					>andere animatie</button
+				>
+			</p>
+		{:else}
+			<p>
+				Ga op zoek naar het vlammetje, scan de QR code op het raam en unlock de
+				besturing van het vlammetje
+			</p>
+		{/if}
 	{/if}
 </div>

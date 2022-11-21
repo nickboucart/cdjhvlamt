@@ -9,6 +9,9 @@
   import OverOns from "./routes/OverOns.svelte";
   import Footer from "./components/Footer.svelte";
   import Privacy from "./routes/Privacy.svelte";
+  import Gevonden from "./routes/Gevonden.svelte";
+  import VlamQRCode from "./routes/VlamQRCode.svelte";
+
   
   export let url = "";
   const queryClient = new QueryClient();
@@ -23,6 +26,8 @@
     </nav>
     <div>
       <Route path="het-spel" component="{Spel}" />
+      <Route path="/gevonden/:id" component="{Gevonden}" />
+      <Route path="vlammetjes/:id/qrcode" component="{VlamQRCode}" />
       <Route path="vlammetjes/:id" component="{Vlam}" />
       <Route path="about" component="{OverOns}" />
       <Route path="privacy" component="{Privacy}" />

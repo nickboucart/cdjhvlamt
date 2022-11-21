@@ -1,6 +1,8 @@
 <script>
 	import { onMount, onDestroy } from "svelte";
 	import { navigate } from "svelte-routing";
+	import { bezochteVlammekes } from "../helpers/stores";
+	import { isVlamGevonden } from "../helpers/gevondenHelper";
 
 	export let vlammetjes;
 	export let mapCenter = [50.7360524, 4.2374349];
@@ -11,9 +13,7 @@
 
 	onMount(async () => {
 		const leaflet = await import("leaflet");
-		console.log(vlammetjes);
-
-		map = leaflet.map(mapElement).setView( mapCenter, zoom);
+		map = leaflet.map(mapElement).setView(mapCenter, zoom);
 
 		leaflet
 			.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -24,16 +24,19 @@
 
 		vlammetjes.forEach((vlammetje) => {
 			if (vlammetje.attributes.lat) {
-				leaflet
+				const kleur = isVlamGevonden(vlammetje.thingName) ? 'green' : 'blue';
+				const c = leaflet
 					.circle([vlammetje.attributes.lat, vlammetje.attributes.lng], {
 						radius: 50,
-					}).addTo(map).on('click', (e) => {  navigate(`/vlammetjes/${vlammetje.thingName}`)  });
+					})
+					.addTo(map)
+					.on("click", (e) => {
+						navigate(`/vlammetjes/${vlammetje.thingName}`);
+					});
+				c.setStyle({color: kleur});
+
 			}
 		});
-
-		// leaflet.marker([51.5, -0.09]).addTo(map)
-		// 		.bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-		// 		.openPopup();
 	});
 
 	onDestroy(async () => {
