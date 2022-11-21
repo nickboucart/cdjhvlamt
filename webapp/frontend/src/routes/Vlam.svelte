@@ -16,8 +16,6 @@
 </script>
 
 <div>
-	<h1>Individuele Vlam</h1>
-
 	{#if $queryResult.isLoading}
 		<span>Loading...</span>
 	{:else if $queryResult.error}

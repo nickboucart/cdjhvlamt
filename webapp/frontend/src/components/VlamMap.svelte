@@ -1,6 +1,6 @@
 <script>
 	import { onMount, onDestroy } from "svelte";
-	import Vlam from "../routes/Vlam.svelte";
+	import { navigate } from "svelte-routing";
 
 	export let vlammetjes;
 	export let mapCenter = [50.7360524, 4.2374349];
@@ -27,8 +27,7 @@
 				leaflet
 					.circle([vlammetje.attributes.lat, vlammetje.attributes.lng], {
 						radius: 50,
-					})
-					.addTo(map);
+					}).addTo(map).on('click', (e) => {  navigate(`/vlammetjes/${vlammetje.thingName}`)  });
 			}
 		});
 
