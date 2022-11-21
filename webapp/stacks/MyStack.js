@@ -1,6 +1,6 @@
 import { Api, ViteStaticSite } from "@serverless-stack/resources";
 
-export function MyStack({ stack }) {
+export function MyStack({ app, stack }) {
   const api = new Api(stack, "api", {
     cors: true,
     routes: {
@@ -29,6 +29,11 @@ export function MyStack({ stack }) {
   // Deploy our Svelte app
   const site = new ViteStaticSite(stack, "SvelteJSSite", {
     path: "frontend",
+    customDomain: {
+      domainName:
+        app.stage === "prod" ? "cdjhvlamt.be" : `${app.stage}.cdjhvlamt.be`,
+      domainAlias: app.stage === "prod" ? "www.cdjhvlamt.be" : undefined,
+    },
     environment: {
       // Pass in the API endpoint to our app
       VITE_APP_API_URL: api.url,
