@@ -2,6 +2,10 @@ import { Api, ViteStaticSite } from "@serverless-stack/resources";
 
 export function MyStack({ app, stack }) {
   const api = new Api(stack, "api", {
+    customDomain: {
+      domainName:
+        app.stage === "prod" ? "api.cdjhvlamt.be" : `api-${app.stage}.cdjhvlamt.be`,
+    },
     cors: true,
     routes: {
       "POST /vlammekes/{id}": {
@@ -25,25 +29,30 @@ export function MyStack({ app, stack }) {
     }
   });
 
-
-  // Deploy our Svelte app
-  const site = new ViteStaticSite(stack, "SvelteJSSite", {
+  const siteConfig = {
     path: "frontend",
-    customDomain: {
-      domainName:
-        app.stage === "prod" ? "cdjhvlamt.be" : `${app.stage}.cdjhvlamt.be`,
-      domainAlias: app.stage === "prod" ? "www.cdjhvlamt.be" : undefined,
-    },
     environment: {
       // Pass in the API endpoint to our app
-      VITE_APP_API_URL: api.url,
+      VITE_APP_API_URL: app.stage === 'prod' ? api.customDomainUrl : api.url,
     },
-  });
+  }
+
+  const customDomain = {
+    domainName: "cdjhvlamt.be",
+    domainAlias: "www.cdjhvlamt.be",
+  };
+
+  if (app.stage === 'prod') {
+    siteConfig.customDomain = customDomain;
+  }
+
+  // Deploy our Svelte app
+  const site = new ViteStaticSite(stack, "SvelteJSSite", siteConfig);
 
   // Show the URLs in the output
   stack.addOutputs({
-    SiteUrl: site.url,
-    ApiEndpoint: api.url,
+    SiteUrl: app.stage === 'prod' ? site.customDomainUrl : site.url,
+    ApiEndpoint: app.stage === 'prod' ? api.customDomainUrl : site.url,
   });
 
 
