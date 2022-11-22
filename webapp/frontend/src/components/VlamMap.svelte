@@ -53,8 +53,12 @@
 
 <style>
 	@import "leaflet/dist/leaflet.css";
+	main {
+		text-align: center;
+	}
 	main div {
-		width: 60%;
-		height: 600px;
+		margin:auto;
+		width: 80%;
+		height: 400px;
 	}
 </style>

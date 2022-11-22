@@ -1,0 +1,26 @@
+:root {
+	--cd-black: #1E323C;
+	--cd-blue: #006AFF;
+	--cd-yellow: #F5BF0A;
+}
+
+
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+	align-items: center; 
+	align-content: center;
+	text-align: center;
+	justify-content: space-around; 
+	min-height: 100vh;
+
+}
+
+#app > * {
+	width: 100%;
+}

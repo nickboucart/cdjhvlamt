@@ -2,6 +2,11 @@
 
 </script>
 
-<div class="footer">
+<footer>
 	todo - ne footer maken
-</div>
+</footer>
+
+<style>
+
+
+</style>

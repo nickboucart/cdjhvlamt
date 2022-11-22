@@ -1,7 +1,6 @@
 <script>
   import { Router, Link, Route } from "svelte-routing";
-  import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
-
+  import { QueryClient, QueryClientProvider } from "@sveltestack/svelte-query";
 
   import Home from "./routes/Home.svelte";
   import Vlam from "./routes/Vlam.svelte";
@@ -11,28 +10,45 @@
   import Privacy from "./routes/Privacy.svelte";
   import Gevonden from "./routes/Gevonden.svelte";
   import VlamQRCode from "./routes/VlamQRCode.svelte";
+  import Navigation from "./components/Navigation.svelte";
 
-  
   export let url = "";
   const queryClient = new QueryClient();
-  </script>
-  
-  <QueryClientProvider client={queryClient}>
-  <Router url="{url}">
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/het-spel">Speel het spel</Link>
-      <Link to="/about">Over Ons</Link>
-    </nav>
-    <div>
-      <Route path="het-spel" component="{Spel}" />
-      <Route path="/gevonden/:id" component="{Gevonden}" />
-      <Route path="vlammetjes/:id/qrcode" component="{VlamQRCode}" />
-      <Route path="vlammetjes/:id" component="{Vlam}" />
-      <Route path="about" component="{OverOns}" />
-      <Route path="privacy" component="{Privacy}" />
+</script>
+
+<QueryClientProvider client={queryClient}>
+  <Router {url}>
+    <div class="header">
+      <Navigation />
+    </div>
+    <div class="content">
+      <Route path="het-spel" component={Spel} />
+      <Route path="/gevonden/:id" component={Gevonden} />
+      <Route path="vlammetjes/:id/qrcode" component={VlamQRCode} />
+      <Route path="vlammetjes/:id" component={Vlam} />
+      <Route path="about" component={OverOns} />
+      <Route path="privacy" component={Privacy} />
       <Route path="/"><Home /></Route>
     </div>
-    <Footer />
+    <div class="footer">
+      <Footer />
+    </div>
   </Router>
 </QueryClientProvider>
+
+<style>
+  .header {
+    background: var(--cd-blue);
+  }
+
+  .content {
+    /* background: green; */
+    flex-grow: 1;
+
+  }
+
+  .footer {
+    height: 50px;
+    background: var(--cd-blue);
+  }
+</style>
