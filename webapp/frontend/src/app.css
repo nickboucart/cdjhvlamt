@@ -24,3 +24,54 @@ html, body {
 #app > * {
 	width: 100%;
 }
+
+
+.navigation {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	list-style: none;
+	height: 100%;
+	padding: 5px;
+	margin: 0;
+	
+}
+.navigation li {
+	padding: 0px;
+	margin: 0px;
+	flex-grow: 1;
+}
+
+.navlink {
+	display: block;
+	border: solid 2px var(--cd-yellow);
+	border-radius: 10px;
+	padding: 5px 50px;
+	margin: 5px;
+}
+
+.navlink:link {
+	text-decoration: none;
+	color: var(--cd-yellow);
+}
+.navlink:visited {
+	text-decoration: none;
+	color: var(--cd-yellow);
+
+}
+
+
+/* small and medium screens */
+@media all and (max-width: 800px) {
+  .navigation {
+    /* When on medium sized screens, we center it by evenly distributing empty space around items */
+    /* justify-content: space-around; */
+		flex-flow: column nowrap;
+
+  }
+	.navigation li {
+		width: 100%;
+		padding: 0;
+	}
+}
