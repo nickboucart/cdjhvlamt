@@ -8,9 +8,3 @@
 	<li><Link class="navlink" to="/het-spel">Speel het spel</Link></li>
 	<li><Link class="navlink" to="/about">Over Ons</Link></li>
 </ul>
-
-
-<style>
-
-
-</style>

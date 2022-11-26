@@ -8,6 +8,7 @@
 html, body {
 	padding: 0;
 	margin: 0;
+	font-family: 'Barlow Regular', sans-serif;
 }
 
 #app {
@@ -45,6 +46,8 @@ html, body {
 
 .navlink {
 	display: block;
+	background: var(--cd-yellow);
+	color: var(--cd-blue);
 	border: solid 2px var(--cd-yellow);
 	border-radius: 10px;
 	padding: 5px 50px;
@@ -53,11 +56,10 @@ html, body {
 
 .navlink:link {
 	text-decoration: none;
-	color: var(--cd-yellow);
 }
 .navlink:visited {
 	text-decoration: none;
-	color: var(--cd-yellow);
+	color: var(--cd-blue);
 
 }
 

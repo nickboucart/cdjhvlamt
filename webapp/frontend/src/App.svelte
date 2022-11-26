@@ -42,9 +42,7 @@
   }
 
   .content {
-    /* background: green; */
     flex-grow: 1;
-
   }
 
   .footer {
