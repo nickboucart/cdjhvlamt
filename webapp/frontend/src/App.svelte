@@ -11,6 +11,7 @@
   import Gevonden from "./routes/Gevonden.svelte";
   import VlamQRCode from "./routes/VlamQRCode.svelte";
   import Navigation from "./components/Navigation.svelte";
+  import ScratchSpellen from "./routes/ScratchSpellen.svelte";
 
   export let url = "";
   const queryClient = new QueryClient();
@@ -22,12 +23,13 @@
       <Navigation />
     </div>
     <div class="content">
-      <Route path="het-spel" component={Spel} />
+      <Route path="/het-spel" component={Spel} />
       <Route path="/gevonden/:id" component={Gevonden} />
-      <Route path="vlammetjes/:id/qrcode" component={VlamQRCode} />
-      <Route path="vlammetjes/:id" component={Vlam} />
-      <Route path="about" component={OverOns} />
-      <Route path="privacy" component={Privacy} />
+      <Route path="/vlammetjes/:id/qrcode" component={VlamQRCode} />
+      <Route path="/vlammetjes/:id" component={Vlam} />
+      <Route path="/scratch-spelletjes" component={ScratchSpellen} />
+      <Route path="/about" component={OverOns} />
+      <Route path="/privacy" component={Privacy} />
       <Route path="/"><Home /></Route>
     </div>
     <div class="footer">
