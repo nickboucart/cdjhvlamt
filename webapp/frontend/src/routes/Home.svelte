@@ -2,15 +2,16 @@
 </script>
 
 <div class="jumbotron split">
-	<div>	<h1>
-		CoderDojo Halle Vlamt!</h1>
+	<div>
+		<h1>CoderDojo Halle Vlamt!</h1>
 		<h2>Een interactief stadsspel voor de feestdagen!</h2>
-	
-</div>
-<div>
-<img src="/images/vlammetje.gif" alt="een brandend ledvlammetje aan de gevel"/>
-</div>
-
+	</div>
+	<div>
+		<img
+			src="/images/vlammetje.gif"
+			alt="een brandend ledvlammetje aan de gevel"
+		/>
+	</div>
 </div>
 
 <div class="features">
@@ -37,11 +38,45 @@
 	</div>
 </div>
 
+<div class="team">
+	<p>
+		Dit interactieve stadspel werd gemaakt door de coaches en de ninja's van
+		CoderDojo Halle.
+	</p>
+	<p>
+		<img
+		src="/images/cdjh-team-1.jpeg"
+		alt="het coderdojo halle team aan de soldeertafel"
+	/>
+	<img
+	src="/images/cdjh-team-2.jpeg"
+	alt="het coderdojo halle team tijdens een show en tell"
+/>
+<img
+src="/images/cdjh-team-3.jpeg"
+alt="het coderdojo halle team aan de soldeertafel"
+/>
+	</p>
+	<p>
+		Bij CoderDojo kunnen meisjes en jongens van 7 t/m 18 jaar leren
+		programmeren. Dit wordt helemaal gratis verzorgd door vrijwilligers! <br />
+		In Halle komen we 1x per maand samen, in het Vondel. <br /> Interesse? Kijk
+		snel op de website van
+		<a
+			href="https://www.coderdojobelgium.be/nl"
+			target="_blank"
+			rel="noreferrer">CoderDojo Belgium!</a
+		>
+	</p>
+
+</div>
+
 <style>
-
-
 	h1 {
 		text-transform: capitalize;
+	}
+	p {
+		line-height: 150%;
 	}
 
 	.features {
@@ -69,6 +104,14 @@
 		text-align: center;
 	}
 
+	.feature p {
+		font-size: 110%;
+	}
+
+	.team p {
+		font-size: 120%;
+	}
+
 	span.circle {
 		background: var(--cd-yellow);
 		border-radius: 50%;
@@ -92,10 +135,18 @@
 	.split div {
 		flex-grow: 1;
 	}
+	
+	img {
+		border-radius: 50%;
+	}
+
+	.team img {
+		width: 200px;
+		height: 200px;
+	}
 
 	/* small and medium screens */
 	@media all and (max-width: 800px) {
-
 		.features {
 			flex-direction: column;
 		}
