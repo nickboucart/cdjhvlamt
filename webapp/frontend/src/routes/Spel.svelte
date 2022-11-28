@@ -19,7 +19,7 @@
 		vlammetjes
 	</p>
 	<p>
-		Blauwe cirkels op de kaart tonen vlammetjes die je nog niet gevonde hebt, de
+		Blauwe cirkels op de kaart tonen vlammetjes die je nog niet gevonden hebt, de
 		groene heb je al wel gezien.
 	</p>
 	<p>Klik op de cirkels om meer details over het vlammetje te zien.</p>
@@ -42,5 +42,10 @@
 		margin: auto;
 		width: 60%;
 		margin-bottom: 10px;
+	}
+
+	p {
+		line-height: 120%;
+		font-size: 110%
 	}
 </style>
