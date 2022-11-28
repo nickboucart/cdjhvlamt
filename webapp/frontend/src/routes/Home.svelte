@@ -1,4 +1,5 @@
 <script>
+	import {Link} from "svelte-routing";
 </script>
 
 <div class="jumbotron split">
@@ -68,6 +69,7 @@ alt="het coderdojo halle team aan de soldeertafel"
 			rel="noreferrer">CoderDojo Belgium!</a
 		>
 	</p>
+	<p>Op onze <Link to="/scratch-spelletjes">spelletjespagina</Link> vind je alvast enkele online games gemaakt door onze ninja's.</p>
 
 </div>
 
