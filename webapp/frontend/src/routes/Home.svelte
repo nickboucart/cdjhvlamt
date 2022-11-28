@@ -1,11 +1,16 @@
 <script>
 </script>
 
-<div class="jumbotron">
-	<h1>
-		CoderDojo Halle Vlamt <br /> Een interactief stadsspel voor de feestdagen!
-	</h1>
-	<!-- <h2>Zoek de vlammetjes, scan de QR code en unlock de besturing het vlammetje</h2> -->
+<div class="jumbotron split">
+	<div>	<h1>
+		CoderDojo Halle Vlamt!</h1>
+		<h2>Een interactief stadsspel voor de feestdagen!</h2>
+	
+</div>
+<div>
+<img src="/images/vlammetje.gif" alt="een brandend ledvlammetje aan de gevel"/>
+</div>
+
 </div>
 
 <div class="features">
@@ -76,6 +81,16 @@
 		margin-right: 5px;
 		text-align: center;
 		width: 40px;
+	}
+
+	.split {
+		display: flex;
+		flex-direction: row nowrap;
+		align-items: center;
+	}
+
+	.split div {
+		flex-grow: 1;
 	}
 
 	/* small and medium screens */
