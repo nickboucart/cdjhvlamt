@@ -1,7 +1,5 @@
 import network
 import utime
-import machine
-import neopixel
 import time
 import gc
 import sys
@@ -10,6 +8,7 @@ import sys
 import cdjh_mqtt
 import display
 import wifimgr
+import animaties
 
 
 thingName = ""
@@ -28,8 +27,10 @@ def main():
 #     del wifimgr
 #     del sys.modules["wifimgr"]
     gc.collect()
+    aniMgr = animaties.AnimatieMgr(33, 30)
+    aniMgr.stop_annimation_and_run_new_one("fire")
     if ssid:
-        client = cdjh_mqtt.CDJHVlamtMQTTClient(thingName, ssid, passwd)
+        client = cdjh_mqtt.CDJHVlamtMQTTClient(thingName, ssid, passwd, aniMgr)
         client.run()
     else:
         d.text("Oei, we geraken niet op de wifi!!")

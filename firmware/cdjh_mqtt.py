@@ -1,7 +1,6 @@
 import gc
 import json
 import time
-import machine, neopixel
 
 try:
     import uasyncio as asyncio
@@ -13,11 +12,6 @@ from mqtt_as import MQTTClient, config
 
 gc.collect()
 
-import trickLED as tl
-gc.collect()
-
-from trickLED import animations32
-gc.collect()
 
 SERVER = "a26wt0x5359obq-ats.iot.eu-west-1.amazonaws.com"
 
@@ -25,13 +19,13 @@ state = {"state": {"reported": { "animation": "fire"}}}
 
 class CDJHVlamtMQTTClient:
     
-    def __init__(self, thingName, wifi_ssid, wifi_pass):
+    def __init__(self, thingName, wifi_ssid, wifi_pass, animationMgr):
         self.thingName = thingName
         self.shadowTopicPrefix = '$aws/things/' + thingName + '/shadow'
         self.wifi_ssid = wifi_ssid
         self.wifi_pass = wifi_pass
-        self.animation = None
-        self.leds = tl.TrickLED(machine.Pin(33), 60)
+        self.animationMgr = animationMgr
+
          
     def getConfig(self):
         with open('private.key') as f:
@@ -60,21 +54,10 @@ class CDJHVlamtMQTTClient:
             print(s)
             animation_name = msg_as_json["state"]["reported"]["animation"]
             print("new animation should be " + animation_name)
-            self.stop_annimation_and_run_new_one(animation_name)
+            self.animationMgr.stop_annimation_and_run_new_one(animation_name)
 
     async def conn_han(self, client):
         await client.subscribe(self.shadowTopicPrefix + '/#' , 1)
-        
-    def stop_annimation_and_run_new_one(self, animation_name):
-        if self.animation:
-            self.animation.stop()
-        if animation_name == "fire":
-            self.animation = tl.animations32.Fire(self.leds, interval=40)
-            asyncio.create_task(self.animation.play(0, sparking=64, cooling=15))
-        elif animation_name == "conjunction":
-            self.animation = tl.animations32.Conjunction(self.leds)
-            asyncio.create_task(self.animation.play(0))
-        gc.collect()
 
     async def _run(self, client):
         await client.connect()
@@ -89,7 +72,6 @@ class CDJHVlamtMQTTClient:
     def run(self):
         MQTTClient.DEBUG = True  # Optional: print diagnostic messages
         client = MQTTClient(self.getConfig())
-        self.stop_annimation_and_run_new_one('fire')
         try:
             asyncio.run(self._run(client))
         finally:

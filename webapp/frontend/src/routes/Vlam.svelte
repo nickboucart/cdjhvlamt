@@ -40,8 +40,20 @@
 				>
 				<button
 					on:click={() => onClick($queryResult.data.thingName, "conjunction")}
-					>andere animatie</button
+					>Buiten naar binnen</button
 				>
+				<button
+					on:click={() => onClick($queryResult.data.thingName, "sidesweep")}
+					>SideSweep</button
+				>
+				<button
+				on:click={() => onClick($queryResult.data.thingName, "divergent")}
+				>Divergent</button
+			>
+			<button
+			on:click={() => onClick($queryResult.data.thingName, "jitter")}
+			>Jitter</button
+		>
 			</p>
 		{:else}
 			<p>
