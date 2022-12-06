@@ -13,6 +13,7 @@
 
 	async function onClick(thingName, animatie) {
 		await postData("/vlammekes/" + thingName, { animatie: animatie });
+		return false;
 	}
 </script>
 
@@ -35,24 +36,29 @@
 		{#if isVlamGevonden($queryResult.data.thingName)}
 			<p>
 				Stuur het vlammetje aan:
-				<button on:click={() => onClick($queryResult.data.thingName, "fire")}
-					>vlam animatie</button
+				<!-- svelte-ignore a11y-invalid-attribute -->
+				<a class="btn" href="#" title="Vlam Animatie" on:click|preventDefault={() => {onClick(e, $queryResult.data.thingName, "fire");return false;}}
+					>vlam animatie</a
 				>
-				<button
-					on:click={() => onClick($queryResult.data.thingName, "conjunction")}
-					>Buiten naar binnen</button
+				<!-- svelte-ignore a11y-invalid-attribute -->
+				<a class="btn" href="#" title="Buiten naar binnen"
+					on:click|preventDefault={() => onClick($queryResult.data.thingName, "conjunction")}
+					>Buiten naar binnen</a
 				>
-				<button
-					on:click={() => onClick($queryResult.data.thingName, "sidesweep")}
-					>SideSweep</button
+				<!-- svelte-ignore a11y-invalid-attribute -->
+				<a class="btn" href="#" title="Sidesweep"
+					on:click|preventDefault={() => onClick($queryResult.data.thingName, "sidesweep")}
+					>SideSweep</a
 				>
-				<button
-				on:click={() => onClick($queryResult.data.thingName, "divergent")}
-				>Divergent</button
+				<!-- svelte-ignore a11y-invalid-attribute -->
+				<a class="btn" href="#" title="Divergent"
+				on:click|preventDefault={() => onClick($queryResult.data.thingName, "divergent")}
+				>Divergent</a
 			>
-			<button
-			on:click={() => onClick($queryResult.data.thingName, "jitter")}
-			>Jitter</button
+				<!-- svelte-ignore a11y-invalid-attribute -->
+				<a class="btn" href="#" title="Jitter"
+			on:click|preventDefault={() => onClick($queryResult.data.thingName, "jitter")}
+			>Jitter</a
 		>
 			</p>
 		{:else}
@@ -63,3 +69,15 @@
 		{/if}
 	{/if}
 </div>
+
+<style>
+.btn {
+	background: var(--cd-yellow);
+	color: var(--cd-blue);
+	border: solid 2px var(--cd-yellow);
+	border-radius: 10px;
+	padding: 5px 5px;
+	
+}
+
+</style>

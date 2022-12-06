@@ -91,12 +91,13 @@ alt="het coderdojo halle team aan de soldeertafel"
 	}
 
 	.feature {
-		flex-grow: 1;
+		flex: 1;
 		padding-left: 20px;
 		padding-right: 20px;
 		border: 2px solid var(--cd-blue);
 		border-radius: 20px;
 		margin-right: 10px;
+		text-align: justify;
 	}
 	.feature:last-of-type {
 		margin-right: 0;

@@ -180,11 +180,16 @@ class ConnectionManager:
                 <p>&nbsp;</p>
                 <hr />
                 <h5>
+                <p>
                     <span style="color: #ff0000;">
                         Your ssid and password information will be saved into the
                         "%(filename)s" file in your ESP module for future usage.
-                        Be careful about security!
                     </span>
+                    </p>
+                    <p>
+                    Mocht het niet lukken om te connecteren: <a href="/reset">klik hier om de module te resetten</a>
+                    </p>
+                    
                 </h5>
                 <hr />
                 <h2 style="color: #2e6c80;">
@@ -274,7 +279,17 @@ class ConnectionManager:
     def handle_not_found(self, client, url):
         self.send_response(client, "Path not found: {}".format(url), status_code=404)
 
-
+    def handle_reset(self, client):
+        print("resetting device")
+        import os
+        if os.path.exists("wifi.dat"):
+            os.remove("wifi.dat")
+        self.send_response(client,"herstarten...", status_code=200)
+        time.sleep(2)
+        import machine
+        machine.reset()
+            
+            
     def stop(self):
         self.wlan_ap.active(False)
         if self.server_socket:
@@ -327,6 +342,8 @@ class ConnectionManager:
                     self.handle_root(client)
                 elif url == "configure":
                     self.handle_configure(client, request)
+                elif url == "reset":
+                    self.handle_reset(client)
                 else:
                     self.handle_not_found(client, url)
 
