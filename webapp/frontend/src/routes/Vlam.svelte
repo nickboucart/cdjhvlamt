@@ -37,7 +37,7 @@
 			<p>
 				Stuur het vlammetje aan:
 				<!-- svelte-ignore a11y-invalid-attribute -->
-				<a class="btn" href="#" title="Vlam Animatie" on:click|preventDefault={() => {onClick(e, $queryResult.data.thingName, "fire");return false;}}
+				<a class="btn" href="#" title="Vlam Animatie" on:click|preventDefault={() => {onClick($queryResult.data.thingName, "fire");return false;}}
 					>vlam animatie</a
 				>
 				<!-- svelte-ignore a11y-invalid-attribute -->

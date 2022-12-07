@@ -1,5 +1,5 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
+  import { Router, Route } from "svelte-routing";
   import { QueryClient, QueryClientProvider } from "@sveltestack/svelte-query";
 
   import Home from "./routes/Home.svelte";
@@ -48,7 +48,7 @@
   }
 
   .footer {
-    height: 50px;
+    min-height: 50px;
     background: var(--cd-blue);
   }
 </style>

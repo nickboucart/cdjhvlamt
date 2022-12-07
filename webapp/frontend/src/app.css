@@ -42,7 +42,7 @@ html, body {
 .navigation li {
 	padding: 0px;
 	margin: 0px;
-	flex-grow: 1;
+	flex: 1;
 }
 
 .navlink {
