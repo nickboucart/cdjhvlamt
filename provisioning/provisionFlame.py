@@ -2,6 +2,7 @@
 import json
 import argparse
 import shutil
+import random
 import geocoder
 import boto3
 
@@ -20,7 +21,7 @@ thingClient = boto3.client('iot')
 def createThing(eigenaar, adres):
     global thingClient
     global thingName
-    thingName = 'cdjhvlamt-' + eigenaar
+    thingName = 'cdjhvlamt-' + str(random.randint(1000, 9999))
     g = geocoder.osm(adres)
 
     

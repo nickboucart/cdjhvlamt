@@ -1,5 +1,6 @@
 import { IotData, Iot } from "aws-sdk";
 import { ok } from "../helpers/responses";
+import { transform } from "../helpers/transformVlammeke";
 
 const IOTENDPOINT = "a26wt0x5359obq-ats.iot.eu-west-1.amazonaws.com"
 
@@ -18,12 +19,12 @@ export const list = async (event) => {
 		}
 	).promise();
 
-	return ok(vlammekes.things);
+	return ok(vlammekes.things.map(transform));
 };
 
 export const get = async (event) => {
 	const vlam = await iot.describeThing({ "thingName": event.pathParameters.id }).promise();
-	return ok(vlam);
+	return ok(transform(vlam));
 };
 
 

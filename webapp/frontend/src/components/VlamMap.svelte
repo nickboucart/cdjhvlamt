@@ -23,15 +23,15 @@
 			.addTo(map);
 
 		vlammetjes.forEach((vlammetje) => {
-			if (vlammetje.attributes.lat) {
-				const kleur = isVlamGevonden(vlammetje.thingName) ? 'green' : 'blue';
+			if (vlammetje.coord.lat) {
+				const kleur = isVlamGevonden(vlammetje.naam) ? 'green' : 'blue';
 				const c = leaflet
-					.circle([vlammetje.attributes.lat, vlammetje.attributes.lng], {
+					.circle([vlammetje.coord.lat, vlammetje.coord.lng], {
 						radius: 50,
 					})
 					.addTo(map)
 					.on("click", (e) => {
-						navigate(`/vlammetjes/${vlammetje.thingName}`);
+						navigate(`/vlammetjes/${vlammetje.naam}`);
 					});
 				c.setStyle({color: kleur});
 

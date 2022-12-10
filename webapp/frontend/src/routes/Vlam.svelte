@@ -23,44 +23,70 @@
 	{:else if $queryResult.error}
 		<span>An error has occurred: {$queryResult.error.message}</span>
 	{:else}
-		<h2>Het vlammetje van {$queryResult.data.attributes.eigenaar}</h2>
+		<h2>Vlammetje {$queryResult.data.naam}</h2>
 
 		<VlamMap
 			vlammetjes={[$queryResult.data]}
-			mapCenter={[
-				$queryResult.data.attributes.lat,
-				$queryResult.data.attributes.lng,
-			]}
+			mapCenter={[$queryResult.data.coord.lat, $queryResult.data.coord.lng]}
 			zoom={16}
 		/>
-		{#if isVlamGevonden($queryResult.data.thingName)}
-			<p>
-				Stuur het vlammetje aan:
-				<!-- svelte-ignore a11y-invalid-attribute -->
-				<a class="btn" href="#" title="Vlam Animatie" on:click|preventDefault={() => {onClick($queryResult.data.thingName, "fire");return false;}}
-					>vlam animatie</a
-				>
-				<!-- svelte-ignore a11y-invalid-attribute -->
-				<a class="btn" href="#" title="Buiten naar binnen"
-					on:click|preventDefault={() => onClick($queryResult.data.thingName, "conjunction")}
-					>Buiten naar binnen</a
-				>
-				<!-- svelte-ignore a11y-invalid-attribute -->
-				<a class="btn" href="#" title="Sidesweep"
-					on:click|preventDefault={() => onClick($queryResult.data.thingName, "sidesweep")}
-					>SideSweep</a
-				>
-				<!-- svelte-ignore a11y-invalid-attribute -->
-				<a class="btn" href="#" title="Divergent"
-				on:click|preventDefault={() => onClick($queryResult.data.thingName, "divergent")}
-				>Divergent</a
-			>
-				<!-- svelte-ignore a11y-invalid-attribute -->
-				<a class="btn" href="#" title="Jitter"
-			on:click|preventDefault={() => onClick($queryResult.data.thingName, "jitter")}
-			>Jitter</a
-		>
-			</p>
+		{#if isVlamGevonden($queryResult.data.naam)}
+			<p>Stuur het vlammetje aan:</p>
+			<ul class="vlamcommandos">
+				<li>
+					<!-- svelte-ignore a11y-invalid-attribute -->
+					<a
+						class="btn"
+						href="#"
+						title="Vlam Animatie"
+						on:click|preventDefault={() => {
+							onClick($queryResult.data.thingName, "fire");
+							return false;
+						}}>vlam animatie</a
+					>
+				</li>
+				<li>
+					<!-- svelte-ignore a11y-invalid-attribute -->
+					<a
+						class="btn"
+						href="#"
+						title="Buiten naar binnen"
+						on:click|preventDefault={() =>
+							onClick($queryResult.data.naam, "conjunction")}
+						>Buiten naar binnen</a
+					>
+				</li>
+				<li>
+					<!-- svelte-ignore a11y-invalid-attribute -->
+					<a
+						class="btn"
+						href="#"
+						title="Sidesweep"
+						on:click|preventDefault={() =>
+							onClick($queryResult.data.naam, "sidesweep")}>SideSweep</a
+					>
+				</li>
+				<li>
+					<!-- svelte-ignore a11y-invalid-attribute -->
+					<a
+						class="btn"
+						href="#"
+						title="Divergent"
+						on:click|preventDefault={() =>
+							onClick($queryResult.data.naam, "divergent")}>Divergent</a
+					>
+				</li>
+				<li>
+					<!-- svelte-ignore a11y-invalid-attribute -->
+					<a
+						class="btn"
+						href="#"
+						title="Jitter"
+						on:click|preventDefault={() =>
+							onClick($queryResult.data.naam, "jitter")}>Jitter</a
+					>
+				</li>
+			</ul>
 		{:else}
 			<p>
 				Ga op zoek naar het vlammetje, scan de QR code op het raam en unlock de
@@ -71,13 +97,20 @@
 </div>
 
 <style>
-.btn {
-	background: var(--cd-yellow);
-	color: var(--cd-blue);
-	border: solid 2px var(--cd-yellow);
-	border-radius: 10px;
-	padding: 5px 5px;
-	
-}
+	.btn {
+		background: var(--cd-yellow);
+		color: var(--cd-blue);
+		border: solid 2px var(--cd-yellow);
+		border-radius: 10px;
+		padding: 5px 5px;
+	}
 
+	ul.vlamcommandos {
+		list-style: none;
+	}
+
+	ul.vlamcommandos li {
+		display: block;
+		margin: 20px;
+	}
 </style>

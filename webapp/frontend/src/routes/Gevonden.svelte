@@ -27,6 +27,6 @@
 {:else if $queryResult.error}
 	<span>An error has occurred: {$queryResult.error.message}</span>
 {:else}
-	<h2>Je hebt het vlammetje van {$queryResult.data.thingName} gevonden!!</h2>
+	<h2>Je hebt vlammetje {$queryResult.data.naam} gevonden!!</h2>
 	<button on:click={onClick}>Ok.</button>
 {/if}
