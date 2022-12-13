@@ -41,7 +41,6 @@
 						title="Vlam Animatie"
 						on:click|preventDefault={() => {
 							onClick($queryResult.data.thingName, "fire");
-							return false;
 						}}>vlam animatie</a
 					>
 				</li>
@@ -63,7 +62,7 @@
 						href="#"
 						title="Sidesweep"
 						on:click|preventDefault={() =>
-							onClick($queryResult.data.naam, "sidesweep")}>SideSweep</a
+							onClick($queryResult.data.naam, "sidesweep")}>Een kant naar de andere</a
 					>
 				</li>
 				<li>
@@ -73,7 +72,7 @@
 						href="#"
 						title="Divergent"
 						on:click|preventDefault={() =>
-							onClick($queryResult.data.naam, "divergent")}>Divergent</a
+							onClick($queryResult.data.naam, "divergent")}>Binnen naar buiten</a
 					>
 				</li>
 				<li>
@@ -83,7 +82,7 @@
 						href="#"
 						title="Jitter"
 						on:click|preventDefault={() =>
-							onClick($queryResult.data.naam, "jitter")}>Jitter</a
+							onClick($queryResult.data.naam, "jitter")}>Witte flikkering</a
 					>
 				</li>
 			</ul>

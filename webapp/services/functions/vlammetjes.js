@@ -10,7 +10,6 @@ const iot = new Iot();
 
 
 export const list = async (event) => {
-	// const vlammekes = [{ "naam": "florian", "vlamnaam": "vlam-van-florian" }, { "naam": "arlieke", "vlamnaam": "vlam-van-arlieke" }]
 
 	const vlammekes = await iot.listThings(
 		{
