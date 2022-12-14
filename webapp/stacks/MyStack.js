@@ -2,6 +2,15 @@ import { Api, ViteStaticSite } from "@serverless-stack/resources";
 
 export function MyStack({ app, stack }) {
   const api = new Api(stack, "api", {
+    defaults: {
+      throttle: {
+        burst: 5,
+        rate: 10
+      },
+      function: {
+        timeout: 3
+      }
+    },
     customDomain: {
       domainName:
         app.stage === "prod" ? "api.cdjhvlamt.be" : `api-${app.stage}.cdjhvlamt.be`,
