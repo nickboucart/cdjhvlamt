@@ -6,9 +6,6 @@
 <footer>
 	<ul>
 		<li>
-			Over ons
-		</li>
-		<li>
 			<Link to="privacy">Privacy Statement</Link>
 		</li>
 	</ul>

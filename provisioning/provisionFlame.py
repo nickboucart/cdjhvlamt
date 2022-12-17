@@ -34,7 +34,7 @@ def createThing(eigenaar, adres):
             "eigenaar": eigenaar,
             "lat": str(g.json['lat']),
             "lng": str(g.json['lng']),
-            "adres": adres.replace(" ", '_')
+            "adres": adres.replace(" ", '_').replace("'", "_")
         }
     },
     )

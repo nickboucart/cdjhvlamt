@@ -12,9 +12,11 @@
   import VlamQRCode from "./routes/VlamQRCode.svelte";
   import Navigation from "./components/Navigation.svelte";
   import ScratchSpellen from "./routes/ScratchSpellen.svelte";
+  import { getDataForQuery } from "./helpers/APIHelpers";
 
   export let url = "";
   const queryClient = new QueryClient();
+
 </script>
 
 <QueryClientProvider client={queryClient}>

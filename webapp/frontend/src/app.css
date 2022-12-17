@@ -1,6 +1,6 @@
 :root {
 	--cd-black: #1E323C;
-	--cd-blue: #006AFF;
+	--cd-blue: rgb(255, 145, 0);
 	--cd-yellow: #F5BF0A;
 }
 
@@ -48,7 +48,7 @@ html, body {
 .navlink {
 	display: block;
 	background: var(--cd-yellow);
-	color: var(--cd-blue);
+	color: var(--cd-black);
 	border: solid 2px var(--cd-yellow);
 	border-radius: 10px;
 	padding: 5px 50px;
@@ -60,7 +60,7 @@ html, body {
 }
 .navlink:visited {
 	text-decoration: none;
-	color: var(--cd-blue);
+	color: var(--cd-black);
 
 }
 

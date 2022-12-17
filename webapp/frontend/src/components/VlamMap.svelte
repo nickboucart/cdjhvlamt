@@ -6,7 +6,7 @@
 
 	export let vlammetjes;
 	export let mapCenter = [50.7360524, 4.2374349];
-	export let zoom = 14;
+	export let zoom = 12;
 
 	let mapElement;
 	let map;

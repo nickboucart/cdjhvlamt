@@ -1,5 +1,23 @@
 <script>
-	import {Link} from "svelte-routing";
+import { onMount } from "svelte";
+import {Link} from "svelte-routing";
+import { useQueryClient } from "@sveltestack/svelte-query";
+import { getDataForQuery } from "../helpers/APIHelpers";
+
+const client = useQueryClient();
+
+onMount( async() => {
+	// prefetching alle data, zodat het spel supersnel op scherm staat
+	await client.prefetchQuery(
+		"getVlammetjes",
+		() => getDataForQuery("/vlammekes"),
+		{ staleTime: 3 * 60 * 1000 }
+	);
+});
+
+
+
+
 </script>
 
 <div class="jumbotron split">

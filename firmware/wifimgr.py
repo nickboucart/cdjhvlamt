@@ -63,7 +63,8 @@ class ConnectionManager:
                     else:
                         print("skipping unknown encrypted network")
                 else:  # open
-                    connected = self.do_connect(ssid, None)
+                    continue
+                    #connected = self.do_connect(ssid, None)
                 if connected:
                     self.active_ssid = ssid
                     self.active_password = password
@@ -308,7 +309,7 @@ class ConnectionManager:
         self.server_socket = socket.socket()
         self.server_socket.bind(addr)
         self.server_socket.listen(5)
-        self.display.text('Gebruik WiFi ' + ap_ssid + ' met password: ' + ap_password + ' en surf dan naar 192.168.4.1.')
+        self.display.text('Connecteer op WiFi ' + ap_ssid + ' met password: ' + ap_password + ' en surf dan naar 192.168.4.1.')
         print('Connect to WiFi ssid ' + ap_ssid + ', default password: ' + ap_password)
         print('and access the ESP via your favorite web browser at 192.168.4.1.')
         print('Listening on:', addr)

@@ -39,5 +39,7 @@ export const update = async (event) => {
 		payload: JSON.stringify(payLoad)
 	}).promise();
 
+	console.log(response);
+
 	return ok();
 }

@@ -40,7 +40,7 @@
 						href="#"
 						title="Vlam Animatie"
 						on:click|preventDefault={() => {
-							onClick($queryResult.data.thingName, "fire");
+							onClick($queryResult.data.naam, "fire");
 						}}>vlam animatie</a
 					>
 				</li>
